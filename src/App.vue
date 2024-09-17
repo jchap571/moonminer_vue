@@ -5,13 +5,27 @@ import { AppState } from './AppState.js'
 import { oreService } from './services/OreService.js'
 
 
-// let oreCount = ref(0)+
+
+// look at reference for players
 
 const ore = computed(() => AppState.ore)
 
+const upgrades = AppState.clickUpgrades
+
+
+
+
+
+
 function mine() {
+  console.log('increasing ore', ore)
   oreService.mine()
-  console.log('increasing ore')
+}
+
+
+function buyKnife() {
+  console.log('buying a knife')
+  oreService.buyKnife()
 }
 
 
@@ -68,17 +82,19 @@ function mine() {
     <!-- Click upgrade/auto upgrade buttons and stats -->
     <section class="row">
       <div class="col-3">
-        Click Upgrades
-        <button>Knife</button>
-        <button>Drill</button>
+
+        <button @click="buyKnife()">Knife</button>
+        <button @click="buyDrill()">Drill</button>
       </div>
 
       <div class="col-3">
-        Automatic Upgrades
-        <button>Mousetronaut</button>
-        <button>Space Station</button>
+
+        <button @click="buyMousetronaut()">Mousetronaut</button>
+        <button @click="buySpaceStation()">Space Station</button>
       </div>
 
+
+      <!-- // v4ing over the players is another reference I need to look at -->
       <div class="col-3">
         Click stats
         <span># of Knives = to x bonus</span>
